@@ -10,7 +10,7 @@ on:
 
 # Define environment variables to be used throughout the workflow
 env:
-  NODE_VERSION: '18'
+  NODE_VERSION: '16'
 
 # Define jobs to be executed in parallel
 jobs:
