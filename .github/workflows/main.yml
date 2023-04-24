@@ -10,7 +10,7 @@ on:
 
 # Define environment variables to be used throughout the workflow
 env:
-  NODE_VERSION: '16'
+  NODE_VERSION: '18'
 
 # Define jobs to be executed in parallel
 jobs:
@@ -30,11 +30,15 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      # Step 3: Install project dependencies
+      # Step 3: Change to the my-resto-project directory
+      - name: Change to my-resto-project directory
+        run: cd my-resto-project
+
+      # Step 4: Install project dependencies
       - name: Install dependencies
         run: npm ci
 
-      # Step 4: Perform linting checks
+      # Step 5: Perform linting checks
       - name: Linting checks
         run: npm run lint
 
@@ -51,10 +55,14 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
+      # Step 6: Change to the my-resto-project directory
+      - name: Change to my-resto-project directory
+        run: cd my-resto-project
+
       - name: Install dependencies
         run: npm ci
 
-      # Step 5: Run tests
+      # Step 7: Run tests
       - name: Test
         run: npm run test
 
@@ -73,14 +81,18 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
+      # Step 8: Change to the my-resto-project directory
+      - name: Change to my-resto-project directory
+        run: cd my-resto-project
+
       - name: Install dependencies
         run: npm ci
 
-      # Step 6: Build the project
+      # Step 9: Build the project
       - name: Build
         run: npm run build
 
-      # Step 7: Deploy the built project to Netlify
+      # Step 10: Deploy the built project to Netlify
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
