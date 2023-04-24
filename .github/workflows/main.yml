@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: my-resto-project/
+        working-directory: assignment-5-ci-cd-CrimsonCoder42/my-resto-project
     steps:
       # Step 1: Checkout the git repository
       - name: Checkout git repository
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: my-resto-project
+        working-directory: assignment-5-ci-cd-CrimsonCoder42/my-resto-project
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v3
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: my-resto-project
+        working-directory: assignment-5-ci-cd-CrimsonCoder42/my-resto-project
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v3
