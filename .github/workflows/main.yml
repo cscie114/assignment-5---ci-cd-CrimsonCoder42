@@ -1,102 +1,41 @@
-# Continuous Integration workflow
-name: CI
+name: Build & Deploy to Netlify
 
-# Specify when the workflow should be triggered: on push and pull_request events to the "main" branch
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-# Define environment variables to be used throughout the workflow
-env:
-  NODE_VERSION: '18'
-
-# Define jobs to be executed in parallel
 jobs:
-  # Linting job
-  lint:
-    # Run this job on the latest version of Ubuntu
+  build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: assignment-5-ci-cd-CrimsonCoder42/my-resto-project
     steps:
-      # Step 1: Checkout the git repository
-      - name: Checkout git repository
-        uses: actions/checkout@v3
-
-      # Step 2: Setup Node.js with the specified version and cache npm dependencies
-      - name: Setup Node.js $NODE_VERSION
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: "18.x"
           cache: 'npm'
 
-      # Step 4: Install project dependencies
-      - name: Install dependencies
-        run: npm ci
+      - name: 'Create env file from secret'
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
 
-      # Step 5: Perform linting checks
-      - name: Linting checks
-        run: npm run lint
-
-  # Test job
-  test:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: assignment-5-ci-cd-CrimsonCoder42/my-resto-project
-    steps:
-      - name: Checkout git repository
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js $NODE_VERSION
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      # Step 7: Run tests
-      - name: Test
-        run: npm run test
-
-  # Deployment job
-  deploy:
-    # This job depends on the successful completion of the "lint" and "test" jobs
-    needs: [lint, test]
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: assignment-5-ci-cd-CrimsonCoder42/my-resto-project
-    steps:
-      - name: Checkout git repository
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js $NODE_VERSION
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      # Step 9: Build the project
-      - name: Build
-        run: npm run build
-
-      # Step 10: Deploy the built project to Netlify
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
           publish-dir: './public'
-          production-branch: main
+          production-branch: master
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+          functions-dir: './netlify/functions'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

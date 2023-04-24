@@ -24,12 +24,12 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "build": "my-resto-project/node_modules/.bin/gatsby build",
+    "develop": "my-resto-project/node_modules/.bin/gatsby develop",
+    "format": "my-resto-project/node_modules/.bin/prettier --write \\\"**/*.{js,jsx,ts,tsx,json,md,css}\\\"",
+    "start": "my-resto-project/node_modules/.bin/gatsby develop",
+    "serve": "my-resto-project/node_modules/.bin/gatsby serve",
+    "clean": "my-resto-project/node_modules/.bin/gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {
