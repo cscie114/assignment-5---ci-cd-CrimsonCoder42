@@ -46,7 +46,8 @@
     "start": "my-resto-project/node_modules/.bin/gatsby develop",
     "serve": "my-resto-project/node_modules/.bin/gatsby serve",
     "clean": "my-resto-project/node_modules/.bin/gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "lint": "eslint src --ext .js,.jsx"
   },
   "repository": {
     "type": "git",

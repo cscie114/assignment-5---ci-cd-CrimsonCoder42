@@ -1,16 +1,32 @@
 module.exports = {
-    extends: ['./node_modules/ts-standardx/.eslintrc.js'],
-    env: {
-        browser: true,
-        node: true,
-        jest: true
+    root: true,
+    parser: "@babel/eslint-parser",
+    plugins: [
+        "react",
+        "jsx-a11y",
+        "import",
+        "react-hooks",
+        "gatsby",
+    ],
+    extends: [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:react-hooks/recommended",
+        "plugin:gatsby/recommended",
+    ],
+    rules: {
+        // Add your custom rules here
     },
-    overrides: [
-        {
-            files: ['**/*.ts', '**/*.tsx', '*.ts'],
-            rules: {
-                'prettier/prettier': 0
-            }
-        }
-    ]
-}
+    settings: {
+        react: {
+            version: "detect",
+        },
+    },
+};
+
+
+
+
