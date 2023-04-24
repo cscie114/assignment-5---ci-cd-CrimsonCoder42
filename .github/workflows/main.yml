@@ -14,7 +14,7 @@ env:
 
 # Define jobs to be executed in parallel
 jobs:
-#   Linting job
+  # Linting job
   lint:
     # Run this job on the latest version of Ubuntu
     runs-on: ubuntu-latest
@@ -42,27 +42,27 @@ jobs:
         run: npm run lint
 
   # Test job
-#  test:
-#    runs-on: ubuntu-latest
-#    defaults:
-#      run:
-#        working-directory: my-resto-project
-#    steps:
-#      - name: Checkout git repository
-#        uses: actions/checkout@v3
-#
-#      - name: Setup Node.js $NODE_VERSION
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: ${{ env.NODE_VERSION }}
-#          cache: 'npm'
-#
-#      - name: Install dependencies
-#        run: npm ci
-#
-#      # Step 7: Run tests
-#      - name: Test
-#        run: npm run test
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: my-resto-project
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js $NODE_VERSION
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 7: Run tests
+      - name: Test
+        run: npm run test
 
   # Deployment job
   deploy:
