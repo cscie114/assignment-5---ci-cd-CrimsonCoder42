@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: my-resto-project
+        working-directory: my-resto-project/
     steps:
       # Step 1: Checkout the git repository
       - name: Checkout git repository
