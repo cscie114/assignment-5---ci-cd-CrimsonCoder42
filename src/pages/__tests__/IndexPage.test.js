@@ -2,10 +2,6 @@ import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import IndexPage from '../index';
 describe('IndexPage', () => {
-    // it('renders correctly', () => {
-    //     const tree = TestRenderer.create(<IndexPage />).toJSON();
-    //     expect(tree).toMatchSnapshot();
-    // });
 
     it('renders four movie links', () => {
         const testRenderer = TestRenderer.create(<IndexPage />);
