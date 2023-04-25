@@ -3,16 +3,7 @@ import Layout from '../components/Layout';
 import { Link } from 'gatsby';
 import '../styles/page.css';
 
-const IndexPage = ({ data }) => {
-  const [selectedState, setSelectedState] = useState('');
-  const [parks, setParks] = useState([]);
-
-  console.log('data in IndexPage', data);
-
-  const handleStateChange = (event) => {
-    setSelectedState(event.target.value);
-  };
-
+const IndexPage = () => {
 
   return (
       <>
