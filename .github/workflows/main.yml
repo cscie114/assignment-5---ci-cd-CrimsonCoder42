@@ -1,34 +1,44 @@
 # Continuous Integration workflow
 name: CI
 
+# Trigger the workflow on push or pull request events for the main branch
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
+# Set environment variables for the workflow
 env:
   NODE_VERSION: '18'
 
+# Define jobs to be executed in the workflow
 jobs:
+  # Linting job
   lint:
+    # Run this job on the latest Ubuntu version
     runs-on: ubuntu-latest
     steps:
+      # Checkout the git repository
       - name: Checkout git repository
         uses: actions/checkout@v3
 
+      # Set up Node.js with the specified version and cache for npm
       - name: Setup Node.js $NODE_VERSION
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
+      # Install the project's dependencies
       - name: Install dependencies
         run: npm ci
 
+      # Run linting checks
       - name: Linting checks
         run: npm run lint
 
+  # Testing job
   test:
     runs-on: ubuntu-latest
     steps:
@@ -44,10 +54,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Run the tests
       - name: Test
         run: npm run test
 
+  # Deployment job
   deploy:
+    # This job depends on the lint and test jobs
     needs: [lint, test]
     runs-on: ubuntu-latest
     steps:
@@ -63,9 +76,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Build the project
       - name: Build
         run: npm run build
 
+      # Deploy the build to Netlify
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
@@ -76,4 +91,5 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        # Set a timeout for the deployment step
         timeout-minutes: 2

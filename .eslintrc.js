@@ -1,13 +1,7 @@
 module.exports = {
     root: true,
-    parser: "@babel/eslint-parser",
-    plugins: [
-        "react",
-        "jsx-a11y",
-        "import",
-        "react-hooks",
-        "gatsby",
-    ],
+    parser: "babel-eslint",
+    plugins: ["react", "jsx-a11y", "import", "react-hooks", "gatsby"],
     extends: [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -25,7 +19,22 @@ module.exports = {
             version: "detect",
         },
     },
+    parserOptions: {
+        requireConfigFile: false,
+        ecmaFeatures: {
+            jsx: true
+        },
+        ecmaVersion: 12,
+        sourceType: "module"
+    },
+    env: {
+        browser: true,
+        es2021: true,
+        node: true,
+        jest: true
+    },
 };
+
 
 
 
