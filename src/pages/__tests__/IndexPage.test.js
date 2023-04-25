@@ -16,9 +16,9 @@ describe('IndexPage', () => {
         const testInstance = testRenderer.root;
         const images = testInstance.findAllByType('img');
 
-        expect(images[0].props.alt).toBe('Image 1');
-        expect(images[1].props.alt).toBe('Image 2');
-        expect(images[2].props.alt).toBe('Image 3');
-        expect(images[3].props.alt).toBe('Image 4');
+        expect(images[0].props.alt).toBe('John Wick');
+        expect(images[1].props.alt).toBe('John Wick: Chapter 2');
+        expect(images[2].props.alt).toBe('John Wick: Chapter 3 - Parabellum');
+        expect(images[3].props.alt).toBe('John Wick: Chapter 4');
     });
 });
