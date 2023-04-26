@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import { Link } from 'gatsby';
 import '../styles/page.css';
 
 const IndexPage = () => {
+  const [triggered, setTriggered] = useState(false);
+
+  useEffect(() => {
+    if(triggered) {
+      fetch("/.netlify/functions/weatherapi?latitude=39.7456&longitude=-97.0892", {
+        method: "GET",
+      })
+          .then((result) => {
+            return result.json()
+          })
+          .then(json => {
+            console.log(json.data)
+            alert(JSON.stringify((json.data)));
+            setTriggered(false)
+          })
+          .catch((error) => alert(error));
+    }
+  }, [triggered])
+
   return (
       <>
         <Layout>
+          <button onClick={() => {
+            setTriggered(!triggered)}
+          }>Click Me For the Weather in SF</button>
           <div className="container">
             <ul className="image-grid">
               <li>
